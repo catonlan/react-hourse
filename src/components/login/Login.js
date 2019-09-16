@@ -2,6 +2,7 @@ import  React  from 'react'
 
 import  './Login.css'
 import {Form, FormButton} from 'semantic-ui-react'
+import { log } from 'util';
 
 class Login extends React.Component {
     constructor(props) {
@@ -12,8 +13,21 @@ class Login extends React.Component {
             pwd: ''
         }
     }
-    login = () =>{
-        console.log('1111',this.state);
+
+    login = async () =>{
+        // console.log('1111',this.state, this.axios);
+      const res = await this.axios.post('users/login', this.state)
+    //   console.log(res.data);
+      if (res.data.meta.status === 200) {
+          //保存 uid 和 token 到本地
+          localStorage.setItem('uid', res.data.data.uid)
+          localStorage.setItem('token', res.data.data.token)
+
+          // 登录成功跳转到布局页面
+          this.props.history.push('/layout')
+      }else {
+          alert(res.data.meta.msg)
+      }
     }
 
     change = e => {
@@ -34,6 +48,7 @@ class Login extends React.Component {
                         <Form.Field>
                             <Form.Input icon="user" iconPosition="left"  placeholder="请输入用户名"
                             name='uname'
+                            required
                              value={uname}
                              onChange={this.change}
                               />
@@ -43,6 +58,7 @@ class Login extends React.Component {
                             name='pwd'
                             type='password'
                             value={pwd} 
+                            required
                             onChange={this.change}    
                             />
                         </Form.Field>
