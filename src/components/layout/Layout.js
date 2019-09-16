@@ -1,6 +1,6 @@
 import React from 'react'
 import './Layout.css'
-import { Grid, Icon } from 'semantic-ui-react'
+import { Grid,  } from 'semantic-ui-react'
 import {Route, Link, Redirect, Switch} from 'react-router-dom'
 
 import Home from '../home/Home'
@@ -14,10 +14,10 @@ class Layout extends React.Component {
             <div>
                 <div className="main-content">
                     <Switch>
-                        <Route path="/layout/home" Component={Home} />
-                        <Route path="/layout/info" Component={Info} />
-                        <Route path="/layout/chat" Component={Chat} />
-                        <Route path="/layout/mine" Component={Mine} />
+                        <Route exact path="/layout/home" Component={Home} />
+                        <Route exact path="/layout/info" Component={Info} />
+                        <Route exact path="/layout/chat" Component={Chat} />
+                        <Route exact path="/layout/mine" Component={Mine} />
                         <Redirect exact path="/layout/" to="/layout/home" />
                         <Route component={NotFount} />
                     </Switch>
