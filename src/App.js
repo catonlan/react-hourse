@@ -15,8 +15,8 @@ function App() {
   return (
     <Router>
         <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/layout" component={Layout} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/layout" component={Layout} />
           <Redirect exact from="/" to="/login"  />
           <Route component={NotFount} />
         </Switch>
