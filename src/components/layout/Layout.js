@@ -13,16 +13,16 @@ class Layout extends React.Component {
                     <Grid centered>
                         <Grid.Row centered columns={4}>
                             <Grid.Column>
-                                <Link to="/">首页</Link>
+                                <Link to="/layout/home">首页</Link>
                             </Grid.Column>
                             <Grid.Column>
-                                <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
+                                <Link to="/layout/info">资讯</Link>
                             </Grid.Column>
                             <Grid.Column>
-                                <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
+                                <Link to="/layout/chat">微聊</Link>
                             </Grid.Column>
                             <Grid.Column>
-                                <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
+                                <Link to="/layout/mine">我的</Link>
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
