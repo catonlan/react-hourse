@@ -31,10 +31,10 @@ class Layout extends React.Component {
                 <div className="main-content">
                 
                     <Switch>
-                        <Route  path="/layout/home" Component={Home} />
-                        <Route  path="/layout/info" Component={Info} />
-                        <Route  path="/layout/chat" Component={Chat} />
-                        <Route  path="/layout/mine" Component={Mine} />
+                        <Route  path="/layout/home" component={Home} />
+                        <Route  path="/layout/info" component={Info} />
+                        <Route  path="/layout/chat" component={Chat} />
+                        <Route  path="/layout/mine" component={Mine} />
                         <Redirect exact path="/layout/" to="/layout/home" />
                         <Route component={NotFount} />
                     </Switch>
