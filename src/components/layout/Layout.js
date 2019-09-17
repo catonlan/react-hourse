@@ -1,6 +1,6 @@
 import React from 'react'
 import './Layout.css'
-import { Grid,  } from 'semantic-ui-react'
+import { Grid, Icon} from 'semantic-ui-react'
 import {Route, Link, Redirect, Switch} from 'react-router-dom'
 
 import Home from '../home/Home'
@@ -8,34 +8,51 @@ import Info from '../info/Info'
 import Chat from '../chat/Chat'
 import Mine from '../mine/Mine'
 import NotFount from '../404/404'
+
+//自定义 link
+function TabBarLink ({name, icon, to}) {
+    return <Route 
+        path={to}
+        children={({match}) => (
+            <Link to={to}>
+                <div className={match ? "placeholder active" : "placeholder"}>
+                    <Icon name={icon} />
+                    <div>{name}</div>
+                </div>
+            </Link>
+        )}
+    />
+}
+
 class Layout extends React.Component {
     render() {
         return (
             <div>
                 <div className="main-content">
+                weoowe
                     <Switch>
-                        <Route exact path="/layout/home" Component={Home} />
-                        <Route exact path="/layout/info" Component={Info} />
-                        <Route exact path="/layout/chat" Component={Chat} />
-                        <Route exact path="/layout/mine" Component={Mine} />
+                        <Route  path="/layout/home" Component={Home} />
+                        <Route  path="/layout/info" Component={Info} />
+                        <Route  path="/layout/chat" Component={Chat} />
+                        <Route  path="/layout/mine" Component={Mine} />
                         <Redirect exact path="/layout/" to="/layout/home" />
                         <Route component={NotFount} />
                     </Switch>
                 </div>
                 <div className="main-menu">
-                    <Grid centered>
+                    <Grid padded>
                         <Grid.Row centered columns={4}>
                             <Grid.Column>
-                                <Link to="/layout/home">首页</Link>
+                                <TabBarLink name="首页" icon="user secret" to="/layout/home" />
                             </Grid.Column>
                             <Grid.Column>
-                                <Link to="/layout/info">资讯</Link>
+                                <TabBarLink name="资讯" icon="window restore" to="/layout/info" />
                             </Grid.Column>
                             <Grid.Column>
-                                <Link to="/layout/chat">微聊</Link>
+                                <TabBarLink name="微聊" icon="microchip" to="/layout/chat" />
                             </Grid.Column>
                             <Grid.Column>
-                                <Link to="/layout/mine">我的</Link>
+                                <TabBarLink name="我的" icon="window maximize" to="/layout/mine" />
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
