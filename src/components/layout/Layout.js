@@ -1,5 +1,5 @@
 import React from 'react'
-import './Layout.css'
+import './layout.css'
 import { Grid, Icon} from 'semantic-ui-react'
 import {Route, Link, Redirect, Switch} from 'react-router-dom'
 
@@ -29,7 +29,7 @@ class Layout extends React.Component {
         return (
             <div>
                 <div className="main-content">
-                weoowe
+                
                     <Switch>
                         <Route  path="/layout/home" Component={Home} />
                         <Route  path="/layout/info" Component={Info} />
