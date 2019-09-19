@@ -4,7 +4,8 @@ import "./home.css"
 // 导入轮播图样式
 import 'react-image-gallery/styles/css/image-gallery.css'
 // 导入轮播图组件第三方包
-import ImageGallery from 'react-image-gallery'class Home extends React.Component {
+import ImageGallery from 'react-image-gallery'
+class Home extends React.Component {
     constructor(props) {
         super(props);
 
@@ -42,18 +43,18 @@ import ImageGallery from 'react-image-gallery'class Home extends React.Component
         return (
             <Grid padded>
                 {/* 每一行最多显示4列, 装不下自动换一行 */}
-                <Grid.Row>
+                <Grid.Row columns={4}>
                     {menus.map(item => {
                         return (
                             <Grid.Column
                             // onClick={() => {
-                            //     this.clickMenu(item.id, item.menu_name)
+                                // this.clickMenu(item.id, item.menu_name)
                             // }}
                             key={item.id}>
                                 <div className="home-menu-item">
                                     <Icon name="home" size="big"/>
                                 </div>
-                                <div style={{marginTop: 5}}>{this.menu_name}</div>
+                                <div style={{marginTop: 5}}>{item.menu_name}</div>
                             </Grid.Column>
                         )
                     })}
@@ -64,7 +65,7 @@ import ImageGallery from 'react-image-gallery'class Home extends React.Component
 
     render() {
         // 对 state 中的数据进行结构赋值
-        const {isLoading} = this.state
+        const {isLoading, swipes, menus} = this.state
         return (
             <div className="home-cnotainer">
                 {/* 加载视图 */}
