@@ -77,6 +77,35 @@ class Home extends React.Component {
             isLoading: false
         })
     }
+
+    clickMenu = (id, menu_name) => {
+        switch (id) {
+            case 1:
+                //  this.props.history.push(`/list?house_type=${id}&name=${menu_name}`)
+                this.props.history.push(`/list/${id}/${menu_name}`)
+                break
+    
+            case 2:
+                //  this.props.history.push(`/list?house_type=${id}&name=${menu_name}`)
+                this.props.history.push(`/list/${id}/${menu_name}`)
+                break
+      
+            case 3:
+                //  this.props.history.push(`/list?house_type=${id}&name=${menu_name}`)
+                this.props.history.push(`/list/${id}/${menu_name}`)
+                break
+      
+            case 4:
+                //  this.props.history.push(`/list?house_type=${id}&name=${menu_name}`)
+                this.props.history.push(`/list/${id}/${menu_name}`)
+                break
+
+                default:
+                    break
+        }
+    }
+
+
     // 渲染菜单
     renderMenus = menus => {
         return (
@@ -86,9 +115,9 @@ class Home extends React.Component {
                     {menus.map(item => {
                         return (
                             <Grid.Column
-                            // onClick={() => {
-                                // this.clickMenu(item.id, item.menu_name)
-                            // }}
+                            onClick={() => {
+                                this.clickMenu(item.id, item.menu_name)
+                            }}
                             key={item.id}>
                                 <div className="home-menu-item">
                                     <Icon name="home" size="big"/>
@@ -174,14 +203,14 @@ class Home extends React.Component {
         const newHouses = houses.filter(item => item.home_type === 1)
         // 二手精选
         const oldHouses = houses.filter(item => item.home_type === 2)
-        // 二手精选
+        // 热门房源
         const hotHouses = houses.filter(item => item.home_type === 3)
 
         return(
             <div>
                 <HousesList title="最新开盘" houses={newHouses} />
                 <HousesList title="二手精选" houses={oldHouses} />
-                <HousesList title="二手精选" houses={hotHouses} />
+                <HousesList title="热门房源" houses={hotHouses} />
             </div>
         )
     }
