@@ -7,6 +7,18 @@ import 'react-image-gallery/styles/css/image-gallery.css'
 import ImageGallery from 'react-image-gallery'
 
 
+// 导入地图、计算器组件
+import Map from '../map/Map'
+import Calc from '../calc/Calc'
+
+// 导入 react-redux 中的 connect
+import {connect} from 'react-redux'
+import { mapAction, calcAction} from '../../store/actioncreators'
+
+
+
+
+
 // 自定义的子组件, 用来显示房屋列表
 function HousesList({title, houses}) {
     return (
@@ -55,6 +67,7 @@ class Home extends React.Component {
             faqs: [], // 问答
             houses: [], //房屋列表
             isLoading: true  //正在加载中
+            // isShowMap: false // 是否展示地图组件
         }
     }
 
@@ -99,6 +112,16 @@ class Home extends React.Component {
                 //  this.props.history.push(`/list?house_type=${id}&name=${menu_name}`)
                 this.props.history.push(`/list/${id}/${menu_name}`)
                 break
+
+            case 5:
+                // this.setState({isShowMap:true})
+                this.props.showMap()
+
+            case 7:
+                // this.setState({isShowMap:true})
+                this.props.showCalc()
+                break
+
 
                 default:
                     break
@@ -215,21 +238,39 @@ class Home extends React.Component {
         )
     }
 
+// hideMap = () => {
+  //   this.setState({
+  //     isShowMap:false
+  //   })
+  // }
+
+
     render() {
         // 对 state 中的数据进行结构赋值
         const {isLoading, swipes, menus, infos, faqs, houses} = this.state
+        const {isShowMap, isShowCalc} = this.props
+
         return (
             <div className="home-cnotainer">
                 {/* 加载视图 */}
                 <Dimmer active={isLoading} inverted>
                     <Loader inverted>正在加载中.....</Loader>
                 </Dimmer>
+                {/* 地图 & 计算器 */}
+                {/* {isShowMap && <Map callback={this.hideMap}} */}
+
+                {isShowMap && <Map />}
+                {isShowCalc && <Calc />}
+                
                 {/* 头部  搜索*/}
                 <div className="home-topbar">
                     <Input fluid 
                     icon={{name:'search', circular:true, link: true}}
                     placeholder="搜房源..." />
                 </div>
+
+                <div className="home-content">
+                {/* 轮播图 */}
                 <ImageGallery 
                     autoPlay
                     showBullets
@@ -248,8 +289,26 @@ class Home extends React.Component {
                 {/* 房屋列表 */}
                 {this.renderHouse(houses)}
             </div>
+            </div>
         )
     }
 }
 
-export default Home;
+const mapStateToProps = state => {
+    return {
+        isShowMap: state.isShowMap,
+        isShowCalc: state.isShowCalc,
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        showMap() {
+            dispatch(mapAction(true))
+        },
+        showCalc() {
+            dispatch(calcAction(true))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (Home);
